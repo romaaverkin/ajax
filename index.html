@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Запросы AJAX</title>
+    <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="content">
+    <div>
+        <h4 class="instance1">Запрос без параметров: </h4>
+        <h4 class="instance2">Запрос с использованием POST: </h4>
+        <h4 class="instance3">Код выполняет сервер: </h4>
+        <h4 class="instance4">Запрос с использованием JSON: </h4>
+    </div>
+
+    <script language="javascript" type="text/javascript">
+        $.ajax({
+            url: 'handler.php?action=instance1',
+            success: function (data) {
+                $('.instance1').append(data);
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: 'handler.php?action=instance2',
+            data: 'author=King&novel=It',
+            success: function (data) {
+                $('.instance2').append(data);
+            }
+        });
+
+        $.ajax({
+            dataType: 'script',
+            url: 'handler.php?action=instance3',
+        });
+
+        $.ajax({
+            dataType: 'json',
+            url: 'handler.php?action=instance4',
+            success: function (jsondata) {
+                $('.instance4').append('Задача завершилась успешно. Student = ' + jsondata.student + ', Age = ' + jsondata.age + ".");
+            }
+        });
+
+    </script>
+</div>
+</body>
+</html>
